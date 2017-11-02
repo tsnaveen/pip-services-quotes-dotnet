@@ -1,6 +1,7 @@
 ﻿using PipServices.Commons.Commands;
 using PipServices.Commons.Convert;
 using PipServices.Commons.Data;
+using PipServices.Commons.Run;
 using PipServices.Commons.Validate;
 using PipServices.Quotes.Data;
 
@@ -69,10 +70,10 @@ namespace PipServices.Quotes.Logic
                 "create_quote",
                 new ObjectSchema()
                     .WithRequiredProperty("quote", new QuoteV1Schema()),
-                async (correlationId, parameters) =>
+                async (correlation_id, parameters) =>
                 {
-                    var quote = parameters.Get("quote") as QuoteV1;
-                    return await _logic.CreateQuoteAsync(correlationId, quote);
+                    var quote = ExtractQuote(parameters);
+                    return await _logic.CreateQuoteAsync(correlation_id, quote);
                 });
         }
 
@@ -84,7 +85,7 @@ namespace PipServices.Quotes.Logic
                     .WithRequiredProperty("quote", new QuoteV1Schema()),
                 async (correlationId, parameters) =>
                 {
-                    var quote = parameters.Get("quote") as QuoteV1;
+                    var quote = ExtractQuote(parameters);
                     return await _logic.UpdateQuoteAsync(correlationId, quote);
                 });
         }
@@ -100,6 +101,25 @@ namespace PipServices.Quotes.Logic
                     var quoteId = parameters.GetAsString("quote_id");
                     return await _logic.DeleteQuoteByIdAsync(correlationId, quoteId);
                 });
+        }
+
+        private static QuoteV1 ExtractQuote(Parameters args)
+        {
+            var map = args.GetAsMap("quote");
+
+            return ExtractQuote(map);
+        }
+
+        private static QuoteV1 ExtractQuote(AnyValueMap map)
+        {
+            var id = map.GetAsStringWithDefault("id", string.Empty);
+            var text = map.Get("text");
+            var author = map.Get("author");
+            var status = map.GetAsStringWithDefault("status", string.Empty);
+            var tags = map.GetAsArrayWithDefault("tags", null);
+            var all_tags = map.GetAsArrayWithDefault("all_tags", null);
+
+            return new QuoteV1(id, text, author, status);
         }
     }
 }

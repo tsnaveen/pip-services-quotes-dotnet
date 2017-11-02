@@ -9,7 +9,7 @@ using PipServices.Quotes.Persistence;
 
 namespace PipServices.Quotes.Logic
 {
-    public class QuotesController : IConfigurable, IReferenceable, ICommandable, IQuotesController
+    public class QuotesController : IConfigurable, ICommandable, IQuotesController
     {
         private static ConfigParams _defaultConfig = ConfigParams.FromTuples("dependencies.persistence", "pip-services-quotes:persistence:*:*:1.0");
 
@@ -30,12 +30,7 @@ namespace PipServices.Quotes.Logic
 
         public CommandSet GetCommandSet()
         {
-            if (_commandSet == null)
-            {
-                _commandSet = new QuotesCommandSet(this);
-            }
-
-            return _commandSet;
+            return _commandSet ?? (_commandSet = new QuotesCommandSet(this));
         }
 
         public Task<QuoteV1[]> GetQuotesAsync(string correlationId, FilterParams filter, PagingParams paging)

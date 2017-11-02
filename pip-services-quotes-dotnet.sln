@@ -2,11 +2,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{911A1A18-42DB-426E-9F73-55FE2E0587AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{911A1A18-42DB-426E-9F73-55FE2E0587AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src", "src\src.csproj", "{FDBD7E67-F5EE-4444-B803-9D98F6FA98B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "src", "src\src.csproj", "{FDBD7E67-F5EE-4444-B803-9D98F6FA98B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "example", "example\example.csproj", "{9AD1D790-1DBF-4D10-9EAF-362343F9CA79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "example", "example\example.csproj", "{9AD1D790-1DBF-4D10-9EAF-362343F9CA79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{E8E6D66A-7473-4703-A162-325DACFEB32B}"
+	ProjectSection(SolutionItems) = preProject
+		config\config.example.yaml = config\config.example.yaml
+		config\config.yaml = config\config.yaml
+		config\config.yml = config\config.yml
+		config\test_connections.example.yaml = config\test_connections.example.yaml
+		config\test_connections.yaml = config\test_connections.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{6809AF09-41F1-4BAC-83E6-F48E6D3FD310}"
+	ProjectSection(SolutionItems) = preProject
+		data\quotes.json = data\quotes.json
+		data\quotes.test.json = data\quotes.test.json
+		data\sample.json = data\sample.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

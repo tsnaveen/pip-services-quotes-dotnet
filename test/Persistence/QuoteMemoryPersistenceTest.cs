@@ -2,10 +2,10 @@ using Xunit;
 
 using PipServices.Commons.Data;
 using PipServices.Quotes.Persistence;
+using PipServices.Quotes.Data;
 
 namespace PipServices.Quotes.Test.Persistence
 {
-
     public class QuoteMemoryPersistenceTest : AbstractTest
     {
         private TestModel Model { get; set; }
@@ -82,7 +82,24 @@ namespace PipServices.Quotes.Test.Persistence
             var quotesMemoryPersistence = new QuotesMemoryPersistence();
             var filter = new FilterParams
             {
-                { "status", "new" }
+                { "status", QuoteStatusV1.New }
+            };
+
+            CreateTestQuotes(quotesMemoryPersistence);
+
+            var result = quotesMemoryPersistence.GetPageByFilterAsync(Model.CorrelationId, filter, null).Result;
+
+            Assert.Equal(2, result.Length);
+        }
+
+        [Fact]
+        public void It_Should_Get_Page_Async_By_Search_Filter_For_Another_Language()
+        {
+            var quotesMemoryPersistence = new QuotesMemoryPersistence();
+
+            var filter = new FilterParams
+            {
+                { "search", "citar" }
             };
 
             CreateTestQuotes(quotesMemoryPersistence);
@@ -92,11 +109,29 @@ namespace PipServices.Quotes.Test.Persistence
             Assert.Equal(1, result.Length);
         }
 
+        [Fact]
+        public void It_Should_Get_Page_Async_By_Null_Search_Filter()
+        {
+            var quotesMemoryPersistence = new QuotesMemoryPersistence();
+
+            var filter = new FilterParams
+            {
+                { "search", string.Empty }
+            };
+
+            CreateTestQuotes(quotesMemoryPersistence);
+
+            var result = quotesMemoryPersistence.GetPageByFilterAsync(Model.CorrelationId, filter, null).Result;
+
+            Assert.Equal(0, result.Length);
+        }
+
         private void CreateTestQuotes(IQuotesPersistence quotesPersistence)
         {
             quotesPersistence.CreateAsync(Model.CorrelationId, Model.SampleQuote1).Wait();
             quotesPersistence.CreateAsync(Model.CorrelationId, Model.SampleQuote2).Wait();
             quotesPersistence.CreateAsync(Model.CorrelationId, Model.SampleQuote3).Wait();
+            quotesPersistence.CreateAsync(Model.CorrelationId, Model.SampleQuote4).Wait();
         }
     }
 }

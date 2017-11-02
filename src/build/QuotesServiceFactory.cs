@@ -1,4 +1,5 @@
-﻿using PipServices.Commons.Build;
+﻿
+using PipServices.Commons.Build;
 using PipServices.Commons.Refer;
 using PipServices.Quotes.Logic;
 using PipServices.Quotes.Persistence;
