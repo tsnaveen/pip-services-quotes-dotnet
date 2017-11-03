@@ -31,62 +31,6 @@ namespace PipServices.Quotes.Persistence
             return Task.FromResult(filteredItems.Take(take).Skip(skip).ToArray());
         }
 
-        // TODO: Temporary fix until base class will be fixed and released
-        public new Task<QuoteV1> GetOneByIdAsync(string correlationId, string id)
-        {
-            // TODO: _items.FirstOrDefault(x => x.Id == id) - doesn't work for strings
-            //return base.GetOneByIdAsync(correlationId, id);
-
-            _lock.EnterReadLock();
-
-            try
-            {
-                var item = _items.FirstOrDefault(x => x.Id.Equals(id));
-
-                if (item != null)
-                    _logger.Trace(correlationId, "Retrieved {0} by {1}", item, id);
-                else
-                    _logger.Trace(correlationId, "Cannot find {0} by {1}", _typeName, id);
-
-                return Task.FromResult(item);
-            }
-            finally
-            {
-                _lock.ExitReadLock();
-            }
-        }
-
-        // TODO: Temporary fix until base class will be fixed and released
-        public new Task<QuoteV1> DeleteByIdAsync(string correlationId, string id)
-        {
-            // TODO: _items.Find(x => x.Id == id) - doesn't work for strings
-            //return base.DeleteByIdAsync(correlationId, id);
-
-            var item = _items.Find(x => x.Id == id);
-
-            if (item == null)
-            {
-                return Task.FromResult(default(QuoteV1));
-            }
-
-            _lock.EnterWriteLock();
-
-            try
-            {
-                _items.Remove(item);
-
-                _logger.Trace(correlationId, "Deleted {0}", item);
-            }
-            finally
-            {
-                _lock.ExitWriteLock();
-            }
-
-            SaveAsync(correlationId);
-
-            return Task.FromResult(item);
-        }
-
         // TODO: Move to the base class
         private QuoteV1 Sample(IList<QuoteV1> items)
         {
