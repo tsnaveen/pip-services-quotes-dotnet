@@ -20,6 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\src.csproj" />
-    <ProjectReference Include="..\example\example.csproj" />
+    <ProjectReference Include="..\run\run.csproj" />
   </ItemGroup>
 </Project>
