@@ -1,4 +1,4 @@
-﻿namespace PipServices.Quotes.Data
+﻿namespace PipServices.Quotes.Data.Version1
 {
     public class QuoteStatusV1
     {

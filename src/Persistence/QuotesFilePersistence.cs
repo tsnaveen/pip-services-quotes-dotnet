@@ -1,6 +1,6 @@
 ﻿using PipServices.Commons.Config;
 using PipServices.Data.File;
-using PipServices.Quotes.Data;
+using PipServices.Quotes.Data.Version1;
 
 namespace PipServices.Quotes.Persistence
 {

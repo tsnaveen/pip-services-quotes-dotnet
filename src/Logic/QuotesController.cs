@@ -4,7 +4,7 @@ using PipServices.Commons.Commands;
 using PipServices.Commons.Config;
 using PipServices.Commons.Data;
 using PipServices.Commons.Refer;
-using PipServices.Quotes.Data;
+using PipServices.Quotes.Data.Version1;
 using PipServices.Quotes.Persistence;
 
 namespace PipServices.Quotes.Logic

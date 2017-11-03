@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PipServices.Quotes.Data
+namespace PipServices.Quotes.Data.Version1
 {
     // TODO: Move to Pip.Services.Common
-    public class MultiString : Dictionary<string, object>
+    public class MultiString : Dictionary<string, string>
     {
-        public MultiString(Dictionary<string, object> map)
+        public MultiString(Dictionary<string, string> map)
             : base(map)
         {
         }

@@ -1,15 +1,14 @@
 ﻿using Moq;
 
 using PipServices.Commons.Refer;
-using PipServices.Quotes.Data;
-using PipServices.Quotes.Logic;
+using PipServices.Quotes.Data.Version1;
 using PipServices.Quotes.Persistence;
 
 using System.Threading.Tasks;
 
 using Xunit;
 
-namespace PipServices.Quotes.Test.Logic
+namespace PipServices.Quotes.Logic
 {
     public class QuoteControllerTest : AbstractTest
     {

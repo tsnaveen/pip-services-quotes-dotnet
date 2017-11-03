@@ -5,7 +5,6 @@ using PipServices.Commons.Convert;
 using PipServices.Commons.Refer;
 using PipServices.Quotes.Logic;
 using PipServices.Quotes.Persistence;
-using PipServices.Quotes.Services;
 
 using System.Net.Http;
 using System.Text;
@@ -14,7 +13,7 @@ using System.Threading.Tasks;
 
 using Xunit;
 
-namespace PipServices.Quotes.Test.Services
+namespace PipServices.Quotes.Services.Version1
 {
     public class QuotesHttpServiceV1Test : AbstractTest
     {

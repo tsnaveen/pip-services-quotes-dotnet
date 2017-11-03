@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PipServices.Quotes.Test
+namespace PipServices.Quotes
 {
     public abstract class AbstractTest : IDisposable
     {

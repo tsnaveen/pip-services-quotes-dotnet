@@ -3,7 +3,7 @@ using PipServices.Commons.Convert;
 using PipServices.Commons.Data;
 using PipServices.Commons.Run;
 using PipServices.Commons.Validate;
-using PipServices.Quotes.Data;
+using PipServices.Quotes.Data.Version1;
 
 namespace PipServices.Quotes.Logic
 {

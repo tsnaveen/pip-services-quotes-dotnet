@@ -1,7 +1,7 @@
 ﻿using PipServices.Commons.Convert;
 using PipServices.Commons.Validate;
 
-namespace PipServices.Quotes.Data
+namespace PipServices.Quotes.Data.Version1
 {
     public class QuoteV1Schema : ObjectSchema
     {

@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 
-namespace PipServices.Quotes.Data
+namespace PipServices.Quotes.Data.Version1
 {
     public class QuoteV1 : IStringIdentifiable
     {
@@ -51,7 +51,7 @@ namespace PipServices.Quotes.Data
                 return new MultiString(obj as string);
             }
 
-            return new MultiString(obj as Dictionary<string, object>);
+            return new MultiString(obj as Dictionary<string, string>);
         }
     }
 }

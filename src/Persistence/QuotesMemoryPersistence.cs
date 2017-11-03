@@ -5,7 +5,7 @@ using System.Linq;
 
 using PipServices.Commons.Data;
 using PipServices.Data.Memory;
-using PipServices.Quotes.Data;
+using PipServices.Quotes.Data.Version1;
 
 namespace PipServices.Quotes.Persistence
 {

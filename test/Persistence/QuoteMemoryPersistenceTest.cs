@@ -2,9 +2,9 @@ using Xunit;
 
 using PipServices.Commons.Data;
 using PipServices.Quotes.Persistence;
-using PipServices.Quotes.Data;
+using PipServices.Quotes.Data.Version1;
 
-namespace PipServices.Quotes.Test.Persistence
+namespace PipServices.Quotes.Persistence
 {
     public class QuoteMemoryPersistenceTest : AbstractTest
     {

@@ -1,7 +1,7 @@
 ﻿using PipServices.Commons.Refer;
 using PipServices.Net.Rest;
 
-namespace PipServices.Quotes.Services
+namespace PipServices.Quotes.Services.Version1
 {
     public class QuotesHttpServiceV1 : CommandableHttpService
     {
