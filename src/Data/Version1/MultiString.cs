@@ -5,9 +5,9 @@ using System.Linq;
 namespace PipServices.Quotes.Data.Version1
 {
     // TODO: Move to Pip.Services.Common
-    public class MultiString : Dictionary<string, string>
+    public class MultiString : Dictionary<string, object>
     {
-        public MultiString(Dictionary<string, string> map)
+        public MultiString(Dictionary<string, object> map)
             : base(map)
         {
         }

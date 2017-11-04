@@ -16,4 +16,8 @@
     <PackageReference Include="PipServices.Net" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Build\" />
+  </ItemGroup>
+
 </Project>

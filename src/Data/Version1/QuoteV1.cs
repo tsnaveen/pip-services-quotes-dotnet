@@ -51,7 +51,7 @@ namespace PipServices.Quotes.Data.Version1
                 return new MultiString(obj as string);
             }
 
-            return new MultiString(obj as Dictionary<string, string>);
+            return new MultiString(obj as Dictionary<string, object>);
         }
     }
 }

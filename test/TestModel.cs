@@ -24,13 +24,13 @@ namespace PipServices.Quotes
             SampleQuote1 = new QuoteV1("1", new MultiString("Test Quote 1"), new MultiString("Author 1"), QuoteStatusV1.New);
             SampleQuote2 = new QuoteV1("2", new MultiString("Test Quote 2"), new MultiString("Author 2"), QuoteStatusV1.Completed);
             SampleQuote3 = new QuoteV1("3", new MultiString("Test Quote 3"), new MultiString("Author Strange"));
-            SampleQuote4 = new QuoteV1("4", new MultiString(new Dictionary<string, string>()
+            SampleQuote4 = new QuoteV1("4", new MultiString(new Dictionary<string, object>()
                 {
                     { "en", "Test English Quote"},
                     { "es", "Test Spanish Citar"},
 
                 }), 
-                new MultiString(new Dictionary<string, string>()
+                new MultiString(new Dictionary<string, object>()
                 {
                     { "en", "English Author"},
                     { "es", "Spanish Autor"},
