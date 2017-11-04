@@ -31,50 +31,43 @@ This microservice has no dependencies on other microservices.
 Logical contract of the microservice is presented below. For physical implementation (HTTP/REST, Thrift, Seneca, Lambda, etc.),
 please, refer to documentation of the specific protocol.
 
-```typescript
-class QuoteV1 implements IStringIdentifiable {
-    public id: string;
-    public text: MultiString;
-    public author: MultiString;
-    public status: string;
-    public tags: string[];
-    public all_tags: string[];
+```csharp
+public class QuoteV1 : IStringIdentifiable
+{
+    public string Id { get; set; }
+    public MultiString Text { get; set; }
+    public MultiString Author { get; set; }
+    public string Status { get; set; }
+    public string[] Tags { get; set; }
+    public string[] All_Tags { get; set; }
 }
 
-class QuoteStatusV1 {
-    public static readonly New = "new";
-    public static readonly Writing = "writing";
-    public static readonly Translating = "translating";
-    public static readonly Verifying = "verifying";
-    public static readonly Completed = "completed";
+public class QuoteStatusV1
+{
+    public const string New = "new";
+    public const string Writing = "writing";
+    public const string Translating = "translating";
+    public const string Verifying = "verifying";
+    public const string Completed = "completed";
 }
 
-interface IQuotesV1 {
-    getQuotes(correlationId: string, filter: FilterParams, paging: PagingParams, 
-        callback: (err: any, page: DataPage<QuoteV1>) => void): void;
-
-    getRandomQuote(correlationId: string, filter: FilterParams, 
-        callback: (err: any, quote: QuoteV1) => void): void;
-
-    getQuoteById(correlationId: string, quote_id: string, 
-        callback: (err: any, quote: QuoteV1) => void): void;
-
-    createQuote(correlationId: string, quote: QuoteV1, 
-        callback: (err: any, quote: QuoteV1) => void): void;
-
-    updateQuote(correlationId: string, quote: QuoteV1, 
-        callback: (err: any, quote: QuoteV1) => void): void;
-
-    deleteQuoteById(correlationId: string, quote_id: string,
-        callback: (err: any, quote: QuoteV1) => void): void;
+public interface IQuotes
+{
+    Task<QuoteV1[]> GetQuotesAsync(string correlationId, FilterParams filter, PagingParams paging);
+    Task<QuoteV1> GetRandomQuoteAsync(string correlationId, FilterParams filter);
+    Task<QuoteV1> GetQuoteByIdAsync(string correlationId, string quoteId);
+    Task<QuoteV1> CreateQuoteAsync(string correlationId, QuoteV1 quote);
+    Task<QuoteV1> UpdateQuoteAsync(string correlationId, QuoteV1 quote);
+    Task<QuoteV1> DeleteQuoteByIdAsync(string correlationId, string quoteId);
 }
+
 ```
 
 ## Download
 
 Right now the only way to get the microservice is to check it out directly from github repository
 ```bash
-git clone git@github.com:pip-services-content/pip-services-quotes-node.git
+git clone git@github.com:pip-services-content/pip-services-quotes-dotnet.git
 ```
 
 Pip.Service team is working to implement packaging and make stable releases available for your 
@@ -110,7 +103,7 @@ For more information on the microservice configuration see [Configuration Guide]
 
 Start the microservice using the command:
 ```bash
-node run
+dotnet run
 ```
 
 ## Use
@@ -118,90 +111,6 @@ node run
 The easiest way to work with the microservice is to use client SDK. 
 The complete list of available client SDKs for different languages is listed in the [Quick Links](#links)
 
-If you use Node.js then you should add dependency to the client SDK into **package.json** file of your project
-```javascript
-{
-    ...
-    "dependencies": {
-        ....
-        "pip-clients-quotes-node": "^1.1.*",
-        ...
-    }
-}
-```
-
-Inside your code get the reference to the client SDK
-```javascript
-var sdk = new require('pip-clients-quotes-node');
-```
-
-Define client configuration parameters that match configuration of the microservice external API
-```javascript
-// Client configuration
-var config = {
-    connection: {
-        protocol: 'http',
-        host: 'localhost', 
-        port: 8080
-    }
-};
-```
-
-Instantiate the client and open connection to the microservice
-```javascript
-// Create the client instance
-var client = sdk.QuotesHttpClientV1(config);
-
-// Connect to the microservice
-client.open(null, function(err) {
-    if (err) {
-        console.error('Connection to the microservice failed');
-        console.error(err);
-        return;
-    }
-    
-    // Work with the microservice
-    ...
-});
-```
-
-Now the client is ready to perform operations
-```javascript
-// Create a new quote
-var quote = {
-    text: { en: 'Get in hurry slowly' },
-    author: { en: 'Russian proverb' },
-    tags: ['time management'],
-    status: 'completed'
-};
-
-client.createQuote(
-    null,
-    quote,
-    function (err, quote) {
-        ...
-    }
-);
-```
-
-```javascript
-// Get the list of quotes on 'time management' topic
-client.getQuotes(
-    null,
-    {
-        tags: 'time management',
-        status: 'completed'
-    },
-    {
-        total: true,
-        skip: 0,
-        take: 10
-    },
-    function(err, page) {
-    ...    
-    }
-);
-```    
 
 ## Acknowledgements
 
