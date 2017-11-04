@@ -55,24 +55,9 @@ dotnet build
 
 ## <a name="test"></a> Testing
 
-Before you execute tests you need to set configuration options in config.json file.
-As a starting point you can use example from config.example.json:
-
-```bash
-copy config.example.yaml config.yaml
-``` 
-
-After that check all configuration options. Specifically, pay attention to connection options
-for database and dependent microservices. For more information check [Configuration Guide](Configuration.md) 
-
 Command to run unit tests:
 ```bash
-npm test
-```
-
-You can also execute benchmarks as:
-```bash
-npm run benchmark
+dotnet test
 ```
 
 ## <a name="contrib"></a> Contributing
