@@ -1,9 +1,11 @@
 ﻿using Moq;
 
+using PipServices.Commons.Data;
 using PipServices.Commons.Refer;
 using PipServices.Quotes.Data.Version1;
 using PipServices.Quotes.Persistence;
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Xunit;
@@ -75,11 +77,17 @@ namespace PipServices.Quotes.Logic
         [Fact]
         public void It_Should_Get_Quotes_Async()
         {
-            var initialQuotes = new QuoteV1[] { Model.SampleQuote1, Model.SampleQuote2};
-            _moqQuotesPersistence.Setup(p => p.GetPageByFilterAsync(Model.CorrelationId, null, null)).Returns(Task.FromResult(initialQuotes));
+            var initialDataPage = new DataPage<QuoteV1>()
+            {
+                Data = new List<QuoteV1>() { Model.SampleQuote1, Model.SampleQuote2 },
+                Total = 2
+            };
 
-            var resultQuotes = _quotesController.GetQuotesAsync(Model.CorrelationId, null, null).Result;
-            Assert.Equal(initialQuotes.Length, resultQuotes.Length);
+            _moqQuotesPersistence.Setup(p => p.GetPageByFilterAsync(Model.CorrelationId, null, null)).Returns(Task.FromResult(initialDataPage));
+
+            var resultDataPage = _quotesController.GetQuotesAsync(Model.CorrelationId, null, null).Result;
+            Assert.Equal(initialDataPage.Data.Count, resultDataPage.Data.Count);
+            Assert.Equal(initialDataPage.Total, resultDataPage.Total);
         }
 
         [Fact]

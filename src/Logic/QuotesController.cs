@@ -33,7 +33,7 @@ namespace PipServices.Quotes.Logic
             return _commandSet ?? (_commandSet = new QuotesCommandSet(this));
         }
 
-        public Task<QuoteV1[]> GetQuotesAsync(string correlationId, FilterParams filter, PagingParams paging)
+        public Task<DataPage<QuoteV1>> GetQuotesAsync(string correlationId, FilterParams filter, PagingParams paging)
         {
             return _persistence.GetPageByFilterAsync(correlationId, filter, paging);
         }

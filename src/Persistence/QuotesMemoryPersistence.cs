@@ -20,7 +20,7 @@ namespace PipServices.Quotes.Persistence
             return Task.FromResult(Sample(filteredItems));
         }
 
-        public Task<QuoteV1[]> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging)
+        public Task<DataPage<QuoteV1>> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging)
         {
             var filteredItems = Filter<QuoteV1>(_items, ComposeFilter(filter));
 
@@ -28,7 +28,13 @@ namespace PipServices.Quotes.Persistence
             var skip = paging.GetSkip(0);
             var take = paging.GetTake(_maxPageSize);
 
-            return Task.FromResult(filteredItems.Take(take).Skip(skip).ToArray());
+            _logger.Trace(correlationId, "Retrieved %d items", filteredItems.Count);
+
+            return Task.FromResult(new DataPage<QuoteV1>()
+            {
+                Data = filteredItems.Take(take).Skip(skip).ToList(),
+                Total = paging.Total ? filteredItems.Count : (long?)null
+            });
         }
 
         // TODO: Move to the base class

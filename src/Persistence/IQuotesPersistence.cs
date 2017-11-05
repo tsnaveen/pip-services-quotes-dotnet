@@ -8,7 +8,7 @@ namespace PipServices.Quotes.Persistence
 {
     public interface IQuotesPersistence : IGetter<QuoteV1, string>, IWriter<QuoteV1, string>
     {
-        Task<QuoteV1[]> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging);
+        Task<DataPage<QuoteV1>> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging);
 
         Task<QuoteV1> GetOneRandomAsync(string correlationId, FilterParams filter);
     }

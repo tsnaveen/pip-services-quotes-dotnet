@@ -1,7 +1,6 @@
 using Xunit;
 
 using PipServices.Commons.Data;
-using PipServices.Quotes.Persistence;
 using PipServices.Quotes.Data.Version1;
 
 namespace PipServices.Quotes.Persistence
@@ -57,7 +56,7 @@ namespace PipServices.Quotes.Persistence
 
             var result = quotesMemoryPersistence.GetPageByFilterAsync(Model.CorrelationId, filter, null).Result;
 
-            Assert.Equal(quotesMemoryPersistence.ItemsCount, result.Length);
+            Assert.Equal(quotesMemoryPersistence.ItemsCount, result.Data.Count);
         }
 
         [Fact]
@@ -73,7 +72,7 @@ namespace PipServices.Quotes.Persistence
 
             var result = quotesMemoryPersistence.GetPageByFilterAsync(Model.CorrelationId, filter, null).Result;
 
-            Assert.Equal(1, result.Length);
+            Assert.Equal(1, result.Data.Count);
         }
 
         [Fact]
@@ -89,7 +88,7 @@ namespace PipServices.Quotes.Persistence
 
             var result = quotesMemoryPersistence.GetPageByFilterAsync(Model.CorrelationId, filter, null).Result;
 
-            Assert.Equal(2, result.Length);
+            Assert.Equal(2, result.Data.Count);
         }
 
         [Fact]
@@ -106,7 +105,7 @@ namespace PipServices.Quotes.Persistence
 
             var result = quotesMemoryPersistence.GetPageByFilterAsync(Model.CorrelationId, filter, null).Result;
 
-            Assert.Equal(1, result.Length);
+            Assert.Equal(1, result.Data.Count);
         }
 
         [Fact]
@@ -123,7 +122,7 @@ namespace PipServices.Quotes.Persistence
 
             var result = quotesMemoryPersistence.GetPageByFilterAsync(Model.CorrelationId, filter, null).Result;
 
-            Assert.Equal(0, result.Length);
+            Assert.Equal(0, result.Data.Count);
         }
 
         private void CreateTestQuotes(IQuotesPersistence quotesPersistence)
