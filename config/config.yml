@@ -15,7 +15,7 @@
 {{#FILE_ENABLED}}
 # File persistence. Use it for testing of for simple standalone deployments
 - descriptor: "pip-services-quotes:persistence:file:default:1.0"
-  path: {{FILE_PATH}}{{^FILE_PATH}}"./data/quotes.json"{{/FILE_PATH}}
+  path: {{FILE_PATH}}{{^FILE_PATH}}"../data/quotes.json"{{/FILE_PATH}}
 {{/FILE_ENABLED}}
 
 {{#MONGO_ENABLED}}
@@ -34,7 +34,8 @@
 
 {{^MEMORY_ENABLED}}{{^FILE_ENABLED}}{{^MONGO_ENABLED}}
 # Default in-memory persistence
-- descriptor: "pip-services-quotes:persistence:memory:default:1.0"
+- descriptor: "pip-services-quotes:persistence:file:default:1.0"
+  path: {{FILE_PATH}}{{^FILE_PATH}}"../data/quotes.json"{{/FILE_PATH}}
 {{/MONGO_ENABLED}}{{/FILE_ENABLED}}{{/MEMORY_ENABLED}}
 
 # Default controller

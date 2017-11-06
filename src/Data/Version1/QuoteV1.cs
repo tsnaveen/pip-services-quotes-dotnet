@@ -13,6 +13,10 @@ namespace PipServices.Quotes.Data.Version1
         public string[] Tags { get; set; }
         public string[] All_Tags { get; set; }
 
+        public QuoteV1()
+        {
+        }
+
         public QuoteV1(string id, object text, object author, string status = "", string[] tags = null, string[] allTags = null)
         {
             Id = !string.IsNullOrWhiteSpace(id) ? id : IdGenerator.NextLong();

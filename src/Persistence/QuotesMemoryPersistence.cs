@@ -28,7 +28,7 @@ namespace PipServices.Quotes.Persistence
             var skip = paging.GetSkip(0);
             var take = paging.GetTake(_maxPageSize);
 
-            _logger.Trace(correlationId, "Retrieved %d items", filteredItems.Count);
+            _logger.Trace(correlationId, $"Retrieved {filteredItems.Count} items");
 
             return Task.FromResult(new DataPage<QuoteV1>()
             {
@@ -50,18 +50,22 @@ namespace PipServices.Quotes.Persistence
         }
 
         // TODO: Move to the base class
-        private IList<T> Filter<T>(IList<T> items, IList<Func<T, bool>> filterFunctions)
+        private IList<T> Filter<T>(IList<T> items, IList<Func<T, bool>> matchFunctions)
         {
             var result = new List<T>();
 
             foreach (var item in items)
             {
-                foreach (var filterFunction in filterFunctions)
+                var isMatched = true;
+
+                foreach (var matchFunction in matchFunctions)
                 {
-                    if (!filterFunction(item))
-                    {
-                        result.Add(item);
-                    }
+                    isMatched &= matchFunction(item);
+                }
+
+                if (isMatched)
+                {
+                    result.Add(item);
                 }
             }
 
@@ -79,10 +83,10 @@ namespace PipServices.Quotes.Persistence
             var status = filter.GetAsNullableString("status");
             var author = filter.GetAsNullableString("author");
 
-            result.Add(quote => !MatchSearch(quote, search));
-            result.Add(quote => quote.Id != id);
-            result.Add(quote => quote.Status != status);
-            result.Add(quote => !MatchMultilanguageString(quote.Author, author));
+            result.Add(quote => string.IsNullOrWhiteSpace(search) || MatchSearch(quote, search));
+            result.Add(quote => string.IsNullOrWhiteSpace(id) || quote.Id.Equals(id));
+            result.Add(quote => string.IsNullOrWhiteSpace(status) || quote.Status.Equals(status));
+            result.Add(quote => string.IsNullOrWhiteSpace(author) || MatchMultilanguageString(quote.Author, author));
 
             return result;
         }

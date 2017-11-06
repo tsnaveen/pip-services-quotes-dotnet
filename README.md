@@ -88,7 +88,7 @@ Example of microservice configuration
   level: "trace"
 
 - descriptor: "pip-services-quotes:persistence:file:default:1.0"
-  path: "./data/quotes.json"
+  path: "../data/quotes.json"
 
 - descriptor: "pip-services-quotes:controller:default:default:1.0"
 
@@ -103,6 +103,8 @@ For more information on the microservice configuration see [Configuration Guide]
 
 Start the microservice using the command:
 ```bash
+cd run
+
 dotnet run
 ```
 

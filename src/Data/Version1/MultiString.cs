@@ -7,6 +7,10 @@ namespace PipServices.Quotes.Data.Version1
     // TODO: Move to Pip.Services.Common
     public class MultiString : Dictionary<string, object>
     {
+        public MultiString()
+        {
+        }
+
         public MultiString(Dictionary<string, object> map)
             : base(map)
         {

@@ -122,7 +122,7 @@ namespace PipServices.Quotes.Persistence
 
             var result = quotesMemoryPersistence.GetPageByFilterAsync(Model.CorrelationId, filter, null).Result;
 
-            Assert.Equal(0, result.Data.Count);
+            Assert.Equal(4, result.Data.Count);
         }
 
         private void CreateTestQuotes(IQuotesPersistence quotesPersistence)

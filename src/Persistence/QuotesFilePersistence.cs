@@ -8,9 +8,9 @@ namespace PipServices.Quotes.Persistence
     {
         protected JsonFilePersister<QuoteV1> _persister;
 
-        public QuotesFilePersistence(string path)
+        public QuotesFilePersistence()
         {
-            _persister = new JsonFilePersister<QuoteV1>(path);
+            _persister = new JsonFilePersister<QuoteV1>();
             _loader = _persister;
             _saver = _persister;
         }
