@@ -17,14 +17,12 @@ This microservice has no dependencies on other microservices.
 * [Configuration Guide](doc/Configuration.md)
 * [Deployment Guide](doc/Deployment.md)
 * Client SDKs
-  - [Node.js SDK](https://github.com/pip-services/pip-clients-quotes-node)
-  - [Java SDK](https://github.com/pip-services/pip-clients-quotes-java)
-  - [.NET SDK](https://github.com/pip-services/pip-clients-quotes-dotnet)
-  - [Go SDK](https://github.com/pip-services/pip-clients-quotes-go)
+  - [Node.js SDK](https://github.com/pip-services-content/pip-clients-quotes-node)
+  - [Java SDK](https://github.com/pip-services-content/pip-clients-quotes-java)
+  - [.NET SDK](https://github.com/pip-services-content/pip-clients-quotes-dotnet)
+  - [Go SDK](https://github.com/pip-services-content/pip-clients-quotes-go)
 * Communication Protocols
   - [HTTP Version 1](doc/HttpProtocolV1.md)
-  - [Seneca Version 1](doc/SenecaProtocolV1.md)
-  - [Lambda Version 1](doc/LambdaProtocolV1.md)
 
 ## Contract
 
