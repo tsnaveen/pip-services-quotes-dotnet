@@ -18,8 +18,6 @@ See [Configuration Guide](Configuration.md) for details.
 **Step 3.** Start the microservice using the command:
 
 ```bash
+cd run
 dotnet run
 ```
-
-You can use the microservice by calling seneca commands directly as described in [Seneca Protocol](SenecaProtocolV1.md)
-or by using [QuotesSenecaClient](https://github.com/pip-services-content/pip-clients-quotes-node/doc/NodeClientApiV1.md/#client_seneca)

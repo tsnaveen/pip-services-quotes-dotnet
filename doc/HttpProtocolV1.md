@@ -3,9 +3,7 @@
 Quotes microservice implements a HTTP compatible API, that can be accessed on configured port.
 All input and output data is serialized in JSON format. Errors are returned in [standard format]().
 
-* [MultiStringV1 class](#class1)
-* [QuoteV1 class](#class2)
-* [DataPage<QuoteV1> class](#class3)
+* [QuoteV1 class](#class)
 * [POST /quotes/get_quotes](#operation1)
 * [POST /quotes/get_random_quote](#operation2)
 * [POST /quotes/get_quote_by_id](#operation3)
@@ -15,20 +13,7 @@ All input and output data is serialized in JSON format. Errors are returned in [
 
 ## Data types
 
-### <a name="class1"></a> MultiStringV1 class
-
-String that contains versions in multiple languages
-
-**Properties:**
-- en: string - English version of the string
-- sp: string - Spanish version of the string
-- de: string - German version of the string
-- fr: string - Franch version of the string
-- pt: string - Portuguese version of the string
-- ru: string - Russian version of the string
-- .. - other languages can be added here
-
-### <a name="class2"></a> QuoteV1 class
+### <a name="class"></a> QuoteV1 class
 
 Represents an inspirational quote
 
@@ -39,14 +24,6 @@ Represents an inspirational quote
 - status: string - editing status of the quote: 'new', 'writing', 'translating', 'completed' (default: 'new')
 - tags: [string] - (optional) search tags that represent topics associated with the quote
 - all_tags: [string] - (read only) explicit and hash tags in normalized format for searching  
-
-### <a name="class3"></a> DataPage<QuoteV1> class
-
-Represents a paged result with subset of requested quotes
-
-**Properties:**
-- data: [Quote] - array of retrieved Quote page
-- count: int - total number of objects in retrieved resultset
 
 ## Operations
 

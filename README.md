@@ -31,7 +31,7 @@ This microservice has no dependencies on other microservices.
 Logical contract of the microservice is presented below. For physical implementation (HTTP/REST, Thrift, Seneca, Lambda, etc.),
 please, refer to documentation of the specific protocol.
 
-```csharp
+```cs
 public class QuoteV1 : IStringIdentifiable
 {
     public string Id { get; set; }
@@ -104,7 +104,6 @@ For more information on the microservice configuration see [Configuration Guide]
 Start the microservice using the command:
 ```bash
 cd run
-
 dotnet run
 ```
 
@@ -113,6 +112,66 @@ dotnet run
 The easiest way to work with the microservice is to use client SDK. 
 The complete list of available client SDKs for different languages is listed in the [Quick Links](#links)
 
+If you use .NET then get the reference to the required libraries:
+- Pip.Services.Commons : https://github.com/pip-services/pip-services-commons-dotnet
+- Pip.Services.Net : https://github.com/pip-services/pip-services-net-dotnet
+- This .NET Client SDK for Quotes microservices: https://github.com/pip-services-content/pip-clients-quotes-dotnet 
+
+Add **PipServices.Commons** and **PipServices.Quotes.Client.Version1** namespaces
+```cs
+using PipServices.Commons.Config;
+using PipServices.Commons.Data;
+using PipServices.Quotes.Client.Version1;
+```
+
+Define client configuration parameters that match configuration of the microservice external API
+```cs
+// Client configuration
+var config = ConfigParams.FromTuples(
+	"connection.type", "http",
+	"connection.host", "localhost",
+	"connection.port", 8080
+);
+```
+
+Instantiate the client and open connection to the microservice
+```cs
+// Create the client instance
+var client = new QuotesHttpClientV1();
+
+// Connect to the microservice
+client.OpenAsync(null);
+    
+// Work with the microservice
+...
+```
+
+Now the client is ready to perform operations
+```cs
+// Create a new quote
+var quote = new QuoteV1
+{
+	Text = new MultiString("Get in hurry slowly"),
+	Author = new MultiString("Russian proverb"),
+	Status = "completed"
+};
+
+client.CreateQuoteAsync(null, quote);
+```
+
+```cs
+// Get the list of quotes on 'time management' topic
+var quotePage = client.GetQuotesAsync(null,
+    FilterParams.FromTuples(
+        "search", "hurry",
+        "status", "completed"
+    ),
+    new PagingParams(
+        Skip =  0,
+        Take = 10
+    )
+).Result;
+```
 
 ## Acknowledgements
 
