@@ -7,6 +7,12 @@ namespace PipServices.Quotes.Data.Version1
     // TODO: Move to Pip.Services.Common
     public class MultiString : Dictionary<string, object>
     {
+        public const string English = "en";
+        public const string Spanish = "sp";
+        public const string French = "fr";
+        public const string German = "de";
+        public const string Russian = "ru";
+
         public MultiString()
         {
         }
@@ -17,7 +23,7 @@ namespace PipServices.Quotes.Data.Version1
         }
 
         public MultiString(string text)
-            : this("en", text)
+            : this(English, text)
         {
         }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Threading.Tasks;
 
 using PipServices.Commons.Data;
 using PipServices.Data.Memory;
@@ -15,133 +12,12 @@ namespace PipServices.Quotes.Persistence
 
         public Task<QuoteV1> GetOneRandomAsync(string correlationId, FilterParams filter)
         {
-            var filteredItems = Filter<QuoteV1>(_items, ComposeFilter(filter));
-
-            return Task.FromResult(Sample(filteredItems));
+            return GetOneRandomAsync(correlationId, QuotesPersistenceHelper.ComposeFilters(filter));
         }
 
         public Task<DataPage<QuoteV1>> GetPageByFilterAsync(string correlationId, FilterParams filter, PagingParams paging)
         {
-            var filteredItems = Filter<QuoteV1>(_items, ComposeFilter(filter));
-
-            paging = paging ?? new PagingParams();
-            var skip = paging.GetSkip(0);
-            var take = paging.GetTake(_maxPageSize);
-
-            _logger.Trace(correlationId, $"Retrieved {filteredItems.Count} items");
-
-            return Task.FromResult(new DataPage<QuoteV1>()
-            {
-                Data = filteredItems.Take(take).Skip(skip).ToList(),
-                Total = paging.Total ? filteredItems.Count : (long?)null
-            });
-        }
-
-        // TODO: Move to the base class
-        private QuoteV1 Sample(IList<QuoteV1> items)
-        {
-            if (items.Count > 0)
-            {
-                var randomIndex = new Random().Next(0, items.Count - 1);
-                return items[randomIndex];
-            }
-
-            return null;
-        }
-
-        // TODO: Move to the base class
-        private IList<T> Filter<T>(IList<T> items, IList<Func<T, bool>> matchFunctions)
-        {
-            var result = new List<T>();
-
-            foreach (var item in items)
-            {
-                var isMatched = true;
-
-                foreach (var matchFunction in matchFunctions)
-                {
-                    isMatched &= matchFunction(item);
-                }
-
-                if (isMatched)
-                {
-                    result.Add(item);
-                }
-            }
-
-            return result;
-        }
-
-        private IList<Func<QuoteV1, bool>> ComposeFilter(FilterParams filter)
-        {
-            var result = new List<Func<QuoteV1, bool>>();
-
-            filter = filter ?? new FilterParams();
-
-            var search = filter.GetAsNullableString("search");
-            var id = filter.GetAsNullableString("id");
-            var status = filter.GetAsNullableString("status");
-            var author = filter.GetAsNullableString("author");
-
-            result.Add(quote => string.IsNullOrWhiteSpace(search) || MatchSearch(quote, search));
-            result.Add(quote => string.IsNullOrWhiteSpace(id) || quote.Id.Equals(id));
-            result.Add(quote => string.IsNullOrWhiteSpace(status) || quote.Status.Equals(status));
-            result.Add(quote => string.IsNullOrWhiteSpace(author) || MatchMultilanguageString(quote.Author, author));
-
-            return result;
-        }
-
-        private bool MatchSearch(QuoteV1 item, string search)
-        {
-            if (MatchMultilanguageString(item.Text, search))
-            {
-                return true;
-            }
-
-            if (MatchMultilanguageString(item.Author, search))
-            {
-                return true;
-            }
-
-            if (MatchString(item.Status, search))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool MatchMultilanguageString(MultiString multiString, string search)
-        {
-            if (multiString == null)
-            {
-                return false;
-            }
-
-            foreach (var language in multiString.Keys)
-            {
-                if (MatchString(multiString[language].ToString(), search))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool MatchString(string value, string search)
-        {
-            if (string.IsNullOrWhiteSpace(value) && string.IsNullOrWhiteSpace(search))
-            {
-                return true;
-            }
-
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(search))
-            {
-                return false;
-            }
-
-            return value.ToLower().IndexOf(search.ToLower()) >= 0;
+            return GetPageByFilterAsync(correlationId, QuotesPersistenceHelper.ComposeFilters(filter), paging);
         }
     }
 }
