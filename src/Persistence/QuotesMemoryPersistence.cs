@@ -118,9 +118,9 @@ namespace PipServices.Quotes.Persistence
                 return false;
             }
 
-            foreach (var language in multiString.Keys)
+            foreach (var kv in multiString)
             {
-                if (MatchString(multiString[language].ToString(), search))
+                if (MatchString(kv.Value.ToString(), search))
                 {
                     return true;
                 }

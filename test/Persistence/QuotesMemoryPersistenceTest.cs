@@ -5,7 +5,7 @@ using PipServices.Quotes.Data.Version1;
 
 namespace PipServices.Quotes.Persistence
 {
-    public class QuoteMemoryPersistenceTest : AbstractTest
+    public class QuotesMemoryPersistenceTest : AbstractTest
     {
         private TestModel Model { get; set; }
 

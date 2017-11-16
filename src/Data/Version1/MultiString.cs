@@ -5,13 +5,21 @@ using System.Linq;
 namespace PipServices.Quotes.Data.Version1
 {
     // TODO: Move to Pip.Services.Common
-    public class MultiString : Dictionary<string, object>
+    public class MultiString : List<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>
     {
         public MultiString()
         {
         }
 
-        public MultiString(Dictionary<string, object> map)
+        public MultiString(Dictionary<string, string> map)
+        {
+            foreach (string key in map.Keys)
+            {
+                Add(new KeyValuePair<string, string>(key, map[key]));
+            }
+        }
+
+        public MultiString(IEnumerable<KeyValuePair<string, string>> map)
             : base(map)
         {
         }
@@ -23,7 +31,7 @@ namespace PipServices.Quotes.Data.Version1
 
         public MultiString(string language, string text)
         {
-            this[language] = text;
+            this.Add(new KeyValuePair<string, string>(language,text));
         }
 
         public override bool Equals(object obj)
@@ -31,7 +39,7 @@ namespace PipServices.Quotes.Data.Version1
             var multiString = obj as MultiString;
 
             return multiString != null &&
-                multiString.Count == Count && 
+                multiString.Count == Count &&
                 !multiString.Except(this).Any();
         }
 
