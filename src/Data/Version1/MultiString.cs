@@ -53,5 +53,26 @@ namespace PipServices.Quotes.Data.Version1
         {
             return base.GetHashCode();
         }
+
+        public bool Contains(string search)
+        {
+            foreach (var kv in this)
+            {
+                if (Contains(kv.Value.ToString(), search))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool Contains(string value, string search)
+        {
+            return (string.IsNullOrWhiteSpace(value) && string.IsNullOrWhiteSpace(search)) ? true 
+                : (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(search)) ? false 
+                : value.ToLower().IndexOf(search.ToLower()) >= 0;
+        }
+
     }
 }
