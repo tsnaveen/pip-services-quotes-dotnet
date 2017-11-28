@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.test
-    image: ${IMAGE:-pipdevs/test}
+    image: ${IMAGE:-tsnaveen/test}
     command: ${TEST_CMD:-dotnet test test/test.csproj}
     depends_on:
       - mongo

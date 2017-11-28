@@ -2,7 +2,7 @@
 
 COMPONENT=$(ls *.nuspec | tr -d '\r' | awk -F. '{ print $1 }')
 VERSION=$(grep -m1 "<version>" *.nuspec | tr -d '\r' | sed 's/[ ]//g' | awk -F ">" '{ print $2 }' | awk -F "<" '{ print $1 }')
-IMAGE="pipdevs/${COMPONENT}:${VERSION}-build"
+IMAGE="tsnaveen/${COMPONENT}:${VERSION}-build"
 CONTAINER="${COMPONENT}"
 
 # Any subsequent(*) commands which fail will cause the shell script to exit immediately
