@@ -4,4 +4,4 @@ sudo: required
 mono: none
 dotnet: 2
 script:
-  - ./scripts/docker-publish.ps1
+  - ./build.sh --quiet verify
