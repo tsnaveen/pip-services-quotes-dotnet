@@ -11,11 +11,11 @@ set -e
 set -o pipefail
 
 # Set tag on git repo
-#git tag $TAG
-#git push --tags
+git tag $TAG
+git push --tags
 
 # Push production image to docker registry
-docker login -u $DOCKER_USER -p $DOCKER_PASS
-docker push $IMAGE1
-docker push $IMAGE2
+#docker login -u $DOCKER_USER -p $DOCKER_PASS
+#docker push $IMAGE1
+#docker push $IMAGE2
 
