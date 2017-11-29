@@ -6,7 +6,6 @@ dotnet: 2.0.0
 before_script:
   - chmod -R a+x .
 script:
-  - ./build.sh --quiet verify
   - ./package.sh --quiet verify
   - ./publish.sh --quiet verify
 addons:
