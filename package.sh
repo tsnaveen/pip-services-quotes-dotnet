@@ -20,7 +20,8 @@ export IMAGE
 docker-compose -f ./docker-compose.yml up -d
 
 # Test using curl
-curl http://localhost:8080/quotes/get_quotes -X POST -v
+#curl http://localhost:8080/quotes/get_quotes -X POST -v
+wget --post-data="{}" http://localhost:8080/quotes/get_quotes
 
 # Workaround to remove dangling images
 docker-compose -f ./docker-compose.yml down
