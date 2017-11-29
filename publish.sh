@@ -14,6 +14,7 @@ set -o pipefail
 git tag $TAG
 git push --tags git@github.com:tsnaveen/pip-services-quotes-dotnet
 
+
 # Push production image to docker registry
 #docker login -u $DOCKER_USER -p $DOCKER_PASS
 #docker push $IMAGE1
