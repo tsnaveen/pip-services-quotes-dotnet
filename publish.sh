@@ -11,8 +11,10 @@ set -e
 set -o pipefail
 
 # Set tag on git repo
+git remote set-url origin git@bitbucket.org:user/repo
+git remote set-url origin git@github.com:tsnaveen/pip-services-quotes-dotnet.git
 git tag $TAG
-git push --tags git@github.com:tsnaveen/pip-services-quotes-dotnet.git
+git push --tags git@github.com:tsnaveen/pip-services-quotes-dotnet
 
 # Push production image to docker registry
 #docker login -u $DOCKER_USER -p $DOCKER_PASS

@@ -12,10 +12,3 @@ addons:
   apt:
     packages:
       - docker-ce
-env:
-  global:
-    secure: AAAAB3NzaC1yc2EAAAADAQABAAACAQDQEXkSs8QQ9cQrcjWLEYfX4KJBZSZHudAvtEOR/DsMajUtYcRRXV/69eaQyDX5F/Tsg07QyROWZ1f17KyPKVdF25g7hTDCjDN1Ap7CgYnsts7dVSvyn8b6Kn3vOVtrB4ar/UMmnuuC5JC/38Pdez3odIpR5+vpCBjKxUsS2T7LzWbtlgLs7XE0v6waZ1CJFG9MqmlqIbrBwRrMqZ8bWOXkhKnSpOvvvf5792eIBv5oOD3NN/+V6orbIg10a2PfWDZtyt2NlrQ4hoSQ81ZeJP7a4t0jNA090sQ6fYhlzf5CNObqFgj1GsjjJxaRdrkHR+TWx8n/fTG65gTSpsWrykQmayS5B6WfVPvXekv5xYGyB1nPXGCp7f21h6P3c2CnePFztq7yWY52hrbG/zLYG92H8PJov3sZ1gZW87ll5vUXZqL/tWbGy+5xm4ZmY6xGz2MpnsbfNUENIrsGaq9PD+zv59Yo+OjkGvkL2/m8JwuU/4ll2ur/09KHLL+flGtzI6uxl+yvw1VEEYqsib/XZAoInmKFShzxgxl2Z/mpnYdc0LEDKAD3GEyqLOLA2qUHq3CP2RWzHLAygJdpu/yy0ZeVI5iQ9gLmfbt8/v7VTB39znfV7Q0HLFBE0jWVk/h4q8Jzo3EOmZl/L0GThPyljeNmzIosUQDFcjiYCXdCBO40Xw==
-
-
-before_install:
-  - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
