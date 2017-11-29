@@ -11,6 +11,8 @@ set -e
 set -o pipefail
 
 # Set tag on git repo
+git remote set-url origin git@bitbucket.org:user/repo
+git remote set-url origin http://tsnaveen@github.com/tsnaveen/pip-services=quotes-dotnet
 git tag $TAG
 git push --tags
 
