@@ -19,6 +19,8 @@ docker-compose -f ./docker-compose.yml down
 export IMAGE
 docker-compose -f ./docker-compose.yml up -d
 
+sleep 1.5
+
 # Test using curl
 #curl http://localhost:8080/quotes/get_quotes -X POST -v
 wget --post-data="{}" http://localhost:8080/quotes/get_quotes
